@@ -79,3 +79,29 @@ var tobbarany = adatok
     .Select(x => new { x.Key, Db = x.Count() })
     .Where(x => x.Db > 1);
 
+
+Console.WriteLine($"\nTöbbszörös aranyérmesek: {sportagSzam}");
+
+foreach (var item in tobbarany)
+{
+    Console.WriteLine($"\t{item.Key} - {item.Db} ");
+}
+
+var ferfiak = adatok
+    .Where(x => x.Nem.Equals("Férfi"))
+    .Select(x => x.Sportag)
+    .Distinct();
+
+var nenik = adatok
+    .Where(x => x.Nem.Equals("Nő"))
+    .Select(x => x.Sportag)
+    .Distinct();
+
+var metszet = ferfiak.Intersect(nenik);
+
+Console.WriteLine("\nKözös Sportágak:");
+
+foreach (var item in metszet)
+{
+    Console.WriteLine(item);
+}
